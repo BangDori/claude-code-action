@@ -18,9 +18,9 @@ async function run() {
 
     // Install Claude Code plugins if specified
     await installPlugins(
+      process.env.INPUT_PLUGIN_MARKETPLACES,
       process.env.INPUT_PLUGINS,
       process.env.INPUT_PATH_TO_CLAUDE_CODE_EXECUTABLE,
-      process.env.INPUT_PLUGIN_MARKETPLACES,
     );
 
     const promptConfig = await preparePrompt({
@@ -41,6 +41,7 @@ async function run() {
       model: process.env.ANTHROPIC_MODEL,
       pathToClaudeCodeExecutable:
         process.env.INPUT_PATH_TO_CLAUDE_CODE_EXECUTABLE,
+      showFullOutput: process.env.INPUT_SHOW_FULL_OUTPUT,
     });
   } catch (error) {
     core.setFailed(`Action failed with error: ${error}`);
